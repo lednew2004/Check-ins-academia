@@ -1,14 +1,13 @@
 import { randomUUID } from "node:crypto";
-import type { Gym } from "../../../generated/prisma/client";
-import type { GymCreateInput } from "../../../generated/prisma/models";
 import type { FindManyNearbyParams, GymsRepository } from "../gyms-repository";
-import { Prisma } from "../../../generated/prisma/browser";
 import { getDistanceBetweenCoordinates } from "../../utils/get-Between-Distance-coordinates";
+import { Prisma } from "../../../generated/prisma";
+import type { Gym } from "../../../generated/prisma";
 
 export class InMemoryGymRepository implements GymsRepository {
   public items: Gym[] = [];
 
-  async create(data: GymCreateInput) {
+  async create(data: Prisma.GymCreateInput) {
     const gym = {
       id: data.id ?? randomUUID(),
       title: data.title,
